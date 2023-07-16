@@ -18,8 +18,12 @@ Vagrant.configure("2") do |config|
 	v.memory = 2048
 	v.cpus = 4
   end
-  
-  config.vm.network "public_network"
+
+  # public network => bridged 
+  config.vm.network "public_network", bridge: "en0: Wi-Fi (Airport)"
+
+  # install & configurate software
+  config.vm.provision :shell, :path => "bootstrap.sh"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
